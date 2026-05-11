@@ -1453,16 +1453,21 @@ function toggleMenu() {
 }
 
 
+// Show more members (3人ずつ)
 const allCards = document.querySelectorAll('.member-card');
+let visibleCount = 3;
+
 allCards.forEach(card => {
-  if (parseInt(card.dataset.index) >= 3) {
+  if (parseInt(card.dataset.index) >= visibleCount) {
     card.style.display = 'none';
   }
 });
 
 function showMoreMembers() {
+  const nextCount = visibleCount + 3;
   allCards.forEach(card => {
-    if (parseInt(card.dataset.index) >= 3) {
+    const idx = parseInt(card.dataset.index);
+    if (idx >= visibleCount && idx < nextCount) {
       card.style.display = 'block';
       card.style.opacity = '0';
       card.style.transform = 'translateY(20px)';
@@ -1473,7 +1478,10 @@ function showMoreMembers() {
       }, 50);
     }
   });
-  document.getElementById('showMoreBtn').style.display = 'none';
+  visibleCount = nextCount;
+  if (visibleCount >= allCards.length) {
+    document.getElementById('showMoreBtn').style.display = 'none';
+  }
 }
 
   // Modal
