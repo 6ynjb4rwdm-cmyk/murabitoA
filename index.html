@@ -1493,7 +1493,8 @@ document.querySelectorAll('.member-card').forEach(card => {
   card.addEventListener('click', () => {
     document.getElementById('modalAvatar').textContent = card.querySelector('.member-avatar').textContent;
     document.getElementById('modalName').textContent = card.querySelector('.member-name').textContent;
-    document.getElementById('modalGrad').textContent = card.querySelector('.member-grad').textContent;
+    const grads = card.querySelectorAll('.member-grad');
+    document.getElementById('modalGrad').innerHTML = Array.from(grads).map(g => g.textContent).join('<br>');
     document.getElementById('modalDesc').textContent = card.querySelector('.member-desc').textContent;
     const tags = card.querySelectorAll('.tag');
     const tagsEl = document.getElementById('modalTags');
